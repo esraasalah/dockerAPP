@@ -1,6 +1,7 @@
 package com.esraa.myAppwithDocker.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -9,9 +10,12 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.esraa.myAppwithDocker.dto.classes.ProductDtoClass;
+import com.esraa.myAppwithDocker.exceptions.ResourceNotFoundException;
 import com.esraa.myAppwithDocker.mapper.ProductMapper;
 import com.esraa.myAppwithDocker.model.Product;
 import com.esraa.myAppwithDocker.repo.ProductRepo;
+
+import jakarta.persistence.EntityNotFoundException;
 
 
 
@@ -74,7 +78,13 @@ public class ProductService {
 	}
 	
 	
-	
+	public Product getProduct(Integer id) 
+	{
+		
+		return  productRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+		
+
+	}
 	
 	     
 	     
