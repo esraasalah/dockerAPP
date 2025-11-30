@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.esraa.myAppwithDocker.dto.classes.ProductDtoClass;
@@ -20,6 +21,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
+@Lazy
 public class ProductService {  
 	
 	

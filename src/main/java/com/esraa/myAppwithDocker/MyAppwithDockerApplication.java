@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
 @SpringBootApplication
 @EnableCaching
@@ -15,6 +16,7 @@ public class MyAppwithDockerApplication {
 	}
 	
 	
+	@Lazy       // we can ues @Lazy(false) to exclude the bean from the global bean lazy initialization 
 	 @Bean
 	    public ModelMapper modelMapper() {
 	        ModelMapper modelMapper = new ModelMapper();
