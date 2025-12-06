@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.esraa.myAppwithDocker.dto.classes.ProductDtoClass;
 import com.esraa.myAppwithDocker.exceptions.ResourceNotFoundException;
 import com.esraa.myAppwithDocker.mapper.ProductMapper;
+import com.esraa.myAppwithDocker.model.Category;
 import com.esraa.myAppwithDocker.model.Product;
 import com.esraa.myAppwithDocker.repo.ProductRepo;
 
@@ -80,6 +81,7 @@ public class ProductService {
 	}
 	
 	
+	
 	public Product getProduct(Integer id) 
 	{
 		
@@ -88,8 +90,28 @@ public class ProductService {
 
 	}
 	
-	     
-	     
+	
+	public Product getProductLazyLoading(Integer id)  
+	{
+		
+		Product product = productRepo.findById(id).get();
+		
+		System.out.println(product);
+		
+		System.out.println(product.getName());
+		Category category = product.getCategory();
+		return product ;
+		
+	}
+	
+   
+	 public void saveProduct (Product product)
+	 {
+		 
+		 productRepo.save(product);
+		 
+		 
+	 }
 	     
 
 }

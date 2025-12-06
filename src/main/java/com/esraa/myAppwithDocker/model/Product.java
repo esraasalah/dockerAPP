@@ -6,24 +6,43 @@ import java.util.Objects;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.ValueGenerationType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
 @Table(name="products")
 @Data
-public class Product implements Serializable{
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Product implements  Serializable {
 
 	@Id
 	Integer id ;
 	
+	
+	//@Transient
 	String name ;
 	
-	Double price ;
 	
+	//@JsonIgnore
+	 Double price ;
 	
+	//transient Double price ;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	Category category;
+	
+
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -36,6 +55,17 @@ public class Product implements Serializable{
 		
 		return this.name == other.name && this.price == other.price ;
 			
+		
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return " id = " + this.id + 
+				"name = " + this.name + 
+				"price = "  +  this.price   ;
+		
 		
 	}
 	

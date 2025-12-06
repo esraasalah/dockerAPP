@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,8 @@ import com.esraa.myAppwithDocker.dto.classes.ProductDtoClass;
 import com.esraa.myAppwithDocker.model.Product;
 import com.esraa.myAppwithDocker.model.ResponseModel;
 import com.esraa.myAppwithDocker.service.ProductService;
+
+import jakarta.websocket.server.PathParam;
 
 
 
@@ -66,6 +70,28 @@ public class ProductController {
 		
 	}
 	
+	
+	
+	@GetMapping("product/test")
+	public Product getProductLazyLoading(@PathParam(value="id")  Integer id) 
+	{
+		
+	         return  	productService.getProductLazyLoading(id);
+		
+		
+		
+	}
+	
+	
+	@PostMapping("/product")
+	public void saveProduct(@RequestBody Product product)
+	{
+		
+		
+		productService.saveProduct(product);
+		
+		
+	}
 	
 
 }
